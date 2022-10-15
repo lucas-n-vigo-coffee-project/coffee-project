@@ -93,7 +93,6 @@
     ]
 
     let localStorageCoffees = JSON.parse(localStorage.getItem('coffees'))
-    console.log(localStorageCoffees)
 
     if(!localStorageCoffees){
         coffees = default_coffees
@@ -149,5 +148,38 @@
         newCoffeeName.value = ''
         updateCoffees()
     })
+
+    // const Cup = (x,y,width,height,img) => {
+    //     return {
+    //         x : x,
+    //         y : y,
+    //         width : width,
+    //         height : height,
+    //         img : img
+    //     }
+    // }
+
+    // let myCup = null
+    // let canvas = document.getElementById('mycanvas')
+    // const ctx = canvas.getContext("2d")
+    // let img = new Image()
+    
+    // img.onload = () => {
+    //     myCup = Cup(canvas.width / 2 - 50,canvas.height / 2 - 50,100,100,img)
+    //     ctx.imageSmoothingEnabled = false;
+    //     animateCanvas()
+    // }
+
+    // img.src = 'cup.png'
+    // // canvas.style.width = `${window.width}px`;
+    // // canvas.style.height = `${window.height}px`;
+    // const animateCanvas = () => {
+    //     // ctx.clearRect(0,0,canvas.width,canvas.height)
+
+    //     ctx.drawImage(myCup.img, myCup.x, myCup.y, myCup.width, myCup.height)
+    //     requestAnimationFrame(animateCanvas)
+        
+    // }
+
 
 }());

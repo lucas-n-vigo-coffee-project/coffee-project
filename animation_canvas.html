@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Project</title>
+</head>
+<body>
+    <canvas width="400px" height="400px" id="canv"></canvas>
+    <script>
+        //create a cup element
+        let cupImg = new Image()
+        let shortCup,tallCup,grandeCup,ventyCup;
+        cupImg.onload = () => {
+            shortCup = {
+                x : 10,
+                y : 10,
+                width : 50,
+                height : 50,
+                img : cupImg
+            }
+
+            tallCup = {
+                x : 10,
+                y : 10,
+                width : 50,
+                height : 50,
+                img : cupImg
+            }
+            
+        }
+        //get the canvas element
+        const canv = document.getElementById('canv')
+
+        //get the canvas 2d drawing context
+        const ctx = canv.getContext('2d')
+
+
+        // Animation state
+        let items = [
+            {
+                id : 'shortCup',
+                visible : true,
+                draw : () => {
+                    if(shortCup){
+                        console.log("Drawing short cup")
+                        ctx.drawImage(shortCup.img,0,0)
+                    }
+                }
+            },
+        ]
+        
+        //Animation loop
+        const animate = () => {
+            console.log("Drawing frame")
+            //Clear the canvas
+            ctx.clearRect(0, 0, canv.width, canv.height)
+
+            //Redraw the canvas
+            for(let item in items){
+                if(items[item].visible){
+                    items[item].draw()
+                }
+            }
+
+            setTimeout(()=>{
+                requestAnimationFrame(animate)
+            },1000 / 30) //30fps
+        }
+
+        animate()
+        
+    </script>
+</body>
+</html>
