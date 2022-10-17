@@ -12,8 +12,8 @@ function renderCoffee(coffee) {
 function renderCoffees(coffees) {
     coffees.sort((a,b)=>a.id < b.id ? 0 : -1);
 
-    let htmlCol1 = '<div class="col-md-6">';
-    let htmlCol2 = '<div class="col-md-6">';
+    let htmlCol1 = '<div class="col">';
+    let htmlCol2 = '<div class="col">';
     for(let i = coffees.length - 1; i >= 0; i--) {
         if (i % 2 == 0) {
             htmlCol1 += renderCoffee(coffees[i]);
