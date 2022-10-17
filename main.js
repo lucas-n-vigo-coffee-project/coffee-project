@@ -10,10 +10,10 @@ function renderCoffee(coffee) {
 }
 
 function renderCoffees(coffees) {
-    coffees.sort((a,b)=>a.id < b.id ? 0 : -1); //Sort by id in asc order
+    coffees.sort((a,b)=>a.id < b.id ? 0 : -1);
 
-    let htmlCol1 = '<div class="col-sm-6 col-md-6">';//Smith - Left column
-    let htmlCol2 = '<div class="col-sm-6 col-md-6">';//Smith - Right column
+    let htmlCol1 = '<div class="col-md-6">';
+    let htmlCol2 = '<div class="col-md-6">';
     for(let i = coffees.length - 1; i >= 0; i--) {
         if (i % 2 == 0) {
             htmlCol1 += renderCoffee(coffees[i]);
@@ -23,19 +23,50 @@ function renderCoffees(coffees) {
     }
     htmlCol1 += '</div>';
     htmlCol2 += '</div>';
-    let finalHtml = '<div class="row">' + htmlCol1 + htmlCol2 + '</div>';  //Smith - mash columns into one html
+    let finalHtml = '<div class="row">' + htmlCol1 + htmlCol2 + '</div>';
     return finalHtml;
 }
 
-function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
-    var selectedRoast = roastSelection.value;
-    var filteredCoffees = [];
+const updateCoffees = (e) => {
+
+    if(e){
+        e.preventDefault();
+    }
+
+    let selectedRoast = localStorage.getItem('roast_selection');
+
+
+    if(!selectedRoast){
+        localStorage.setItem('roast_selection','all roasts')
+        selectedRoast = 'all roasts'
+    }
+
+    console.log(selectedRoast)
+
+
+    let filteredCoffees = [];
     coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
+
+
+        let searchTerm = localStorage.getItem('search_term')
+
+
+        if(coffee.roast === selectedRoast || selectedRoast === 'all roasts'){
+
+            if(searchTerm){
+
+                if(searchTerm.toLowerCase().includes(coffee.name.toLowerCase())){
+
+                    filteredCoffees.push(coffee)
+                }
+            }else{
+                filteredCoffees.push(coffee)
+            }
         }
     });
+
+
+
     tbody.innerHTML = renderCoffees(filteredCoffees);
 }
 
@@ -57,10 +88,33 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-var tbody = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
-var roastSelection = document.querySelector('#roast-selection');
+let tbody = document.querySelector('#coffees');
+let submitButton = document.querySelector('#submit');
+let roastSelection = document.querySelector('#roast-selection');
 
-tbody.innerHTML = renderCoffees(coffees);
+
+roastSelection.value = localStorage.getItem('roast_selection')
+
+roastSelection.addEventListener('change',e=>{
+    localStorage.setItem('roast_selection',e.target.value)
+    console.log(e.target.value)
+    updateCoffees(e)
+})
+
+updateCoffees()
 
 submitButton.addEventListener('click', updateCoffees);
+
+
+
+const searchInput = document.querySelector('#search_input')
+searchInput.value = localStorage.getItem('search_term')
+let searchTerm = null
+
+
+searchInput.addEventListener('keyup',(e)=>{
+
+    localStorage.setItem('search_term',e.target.value)
+
+    updateCoffees(e)
+})
