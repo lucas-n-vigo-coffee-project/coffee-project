@@ -1,21 +1,30 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    var html = '<tr class="coffee">';
-    html += '<td>' + coffee.id + '</td>';
-    html += '<td>' + coffee.name + '</td>';
-    html += '<td>' + coffee.roast + '</td>';
-    html += '</tr>';
+    let html = `<div class="coffee" id="coffee_${coffee.id}">`
+    html += `<h3 id='${coffee.id + '_name'}'>${coffee.name}</h3>`
+    html += `<p id='${coffee.id + '_roast'}'>${coffee.roast}</p>`
+    html += '</div>'
 
     return html;
 }
 
 function renderCoffees(coffees) {
-    var html = '';
-    for(var i = coffees.length - 1; i >= 0; i--) {
-        html += renderCoffee(coffees[i]);
+    coffees.sort((a,b)=>a.id < b.id ? 0 : -1); //Sort by id in asc order
+
+    let htmlCol1 = '<div class="col-sm-6 col-md-6">';//Smith - Left column
+    let htmlCol2 = '<div class="col-sm-6 col-md-6">';//Smith - Right column
+    for(let i = coffees.length - 1; i >= 0; i--) {
+        if (i % 2 == 0) {
+            htmlCol1 += renderCoffee(coffees[i]);
+        } else {
+            htmlCol2 += renderCoffee(coffees[i]);
+        }
     }
-    return html;
+    htmlCol1 += '</div>';
+    htmlCol2 += '</div>';
+    let finalHtml = '<div class="row">' + htmlCol1 + htmlCol2 + '</div>';  //Smith - mash columns into one html
+    return finalHtml;
 }
 
 function updateCoffees(e) {
