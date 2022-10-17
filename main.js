@@ -26,7 +26,7 @@ function renderCoffees(coffees) {
     let finalHtml = '<div class="row">' + htmlCol1 + htmlCol2 + '</div>';
     return finalHtml;
 }
-
+//selecting coffee code
 const updateCoffees = (e) => {
 
     if(e){
@@ -69,7 +69,7 @@ const updateCoffees = (e) => {
 
     tbody.innerHTML = renderCoffees(filteredCoffees);
 }
-
+// coffee list
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
@@ -87,7 +87,7 @@ var coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
-
+//updating selecting coffee code
 let tbody = document.querySelector('#coffees');
 let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
@@ -117,4 +117,23 @@ searchInput.addEventListener('keyup',(e)=>{
     localStorage.setItem('search_term',e.target.value)
 
     updateCoffees(e)
+})
+//adding coffee code
+let newRoastSelection = document.querySelector('#new_roast_selection')
+let submitNewCoffee = document.querySelector('#submit_new')
+let newCoffeeName = document.querySelector('#new_coffee_name_input')
+submitNewCoffee.addEventListener('click',(e)=>{
+    e.preventDefault()
+    let roast = newRoastSelection.value
+    let name = newCoffeeName.value
+    let id = coffees.length + 1
+    let newCofee = {
+        id,
+        name,
+        roast
+    }
+    coffees.push(newCofee)
+    localStorage.setItem('coffees',JSON.stringify(coffees))
+    newCoffeeName.value = ''
+    updateCoffees()
 })
