@@ -46,28 +46,23 @@ const updateCoffees = (e) => {
 
     let filteredCoffees = [];
     coffees.forEach(function(coffee) {
-
-
         let searchTerm = localStorage.getItem('search_term')
-
-
         if(coffee.roast === selectedRoast || selectedRoast === 'all roasts'){
-
             if(searchTerm){
-
                 if(searchTerm.toLowerCase().includes(coffee.name.toLowerCase())){
-
                     filteredCoffees.push(coffee)
                 }
             }else{
                 filteredCoffees.push(coffee)
             }
         }
-    });
+    })
 
-
-
-    tbody.innerHTML = renderCoffees(filteredCoffees);
+    if(filteredCoffees.length == 0){
+        tbody.innerHTML = "<div style='display: flex; align-items-center; justify-content: center;'><em>Search Not Found</em></div>"
+    }else{
+        tbody.innerHTML = renderCoffees(filteredCoffees);
+    }
 }
 // coffee list
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
