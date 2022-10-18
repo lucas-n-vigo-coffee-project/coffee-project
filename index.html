@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
     <title>Coffee Project</title>
     <link rel="stylesheet" href="style.css">
@@ -14,16 +14,36 @@
     <!-- Header -->
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand d-inline" href="#">
+            <a class="navbar-brand d-inline ms-auto me-auto ms-md-1 me-md-0" href="#">
                 <img src="logo.png" height="70px" alt="logo" class="logo">
             </a>
-            <span class="w-50">
-                <img class="floatingCoffeeCup" src="secondcup.png" width="50px" height="50px"/>
-            </span>
-            <span class="navbar-text fs-1 text-white me-2">
+            <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0 d-flex flex-row">
+                <li class="nav-item me-2">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown me-2">
+                    <select id="roast-selection" class="roast_selection form-control" name="roast_selection">
+                        <option selected>all roasts</option>
+                        <option>light</option>
+                        <option>medium</option>
+                        <option>dark</option>
+                    </select>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex me-md-3 ms-auto me-auto">
+                <input type="text" name="search_input" id="search_input" placeholder="Search our Coffee's"
+                       class="search_input form-control ms-auto flex-grow"/>
+            </form>
+            <span class="navbar-text fs-1 text-white ms-auto me-auto me-lg-2">
                 Smooth Brews
             </span>
-            
+
         </div>
     </nav>
     <!-- Separator
@@ -51,7 +71,7 @@
                 <input type="text" name="search_input" id="search_input" placeholder="Search our Coffee's"
                        class="search_input form-control"/>
                 <br/>
-                <input id="submit" type="submit" class="form-control rounded-pill ms-auto me-auto w-auto"/>
+                <input id="submit" type="submit" class="form-control rounded-pill w-auto ms-auto me-auto"/>
                 <br/>
             </form>
 
@@ -74,7 +94,8 @@
                 <input type="text" name="new_coffee_name" placeholder="New Coffee Name"
                        class="new_coffee_name_input form-control" id="new_coffee_name_input"/>
                 <br/>
-                <input type="submit" id="submit_new" name="submit_new" class="form-control rounded-pill w-auto ms-auto me-auto" value="Add Coffee"/>
+                <input type="submit" id="submit_new" name="submit_new"
+                       class="form-control rounded-pill w-auto ms-auto me-auto" value="Add Coffee"/>
                 <br/>
             </form>
 
