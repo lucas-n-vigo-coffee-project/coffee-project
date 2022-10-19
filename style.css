@@ -54,25 +54,25 @@ input[type=submit]:hover{
     filter: drop-shadow(0px 0px 8px white);
 }
 
-@keyframes moveLeftRight {
-    from {
-        left : 0%;
-    }
+/*@keyframes moveLeftRight {*/
+/*    from {*/
+/*        left : 0%;*/
+/*    }*/
 
-    to {
-        left: 100%;
-    }
-}
+/*    to {*/
+/*        left: 100%;*/
+/*    }*/
+/*}*/
 
-@keyframes wiggleUpAndDown {
-    from {
-        top : -10px
-    }
+/*@keyframes wiggleUpAndDown {*/
+/*    from {*/
+/*        top : -10px*/
+/*    }*/
 
-    to {
-        top : 20px
-    }
-}
+/*    to {*/
+/*        top : 20px*/
+/*    }*/
+/*}*/
 
 .bounceLeftRight {
     animation: moveLeftRight 10s linear 10s infinite alternate;
