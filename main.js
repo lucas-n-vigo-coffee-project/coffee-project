@@ -44,24 +44,27 @@ const updateCoffees = (e) => {
     console.log(selectedRoast)
 
 
-    let filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        let searchTerm = localStorage.getItem('search_term')
-        if(coffee.roast === selectedRoast || selectedRoast === 'all roasts'){
-            if(searchTerm){
-                if(searchTerm.toLowerCase().includes(coffee.name.toLowerCase())){
-                    filteredCoffees.push(coffee)
-                }
-            }else{
-                filteredCoffees.push(coffee)
-            }
-        }
-    })
+    // let filteredCoffees = [];
+    // coffees.forEach(function(coffee) {
+    let searchTerm = localStorage.getItem('search_term')
+    //     if(coffee.roast === selectedRoast || selectedRoast === 'all roasts'){
+    //         if(searchTerm){
+    //
+    //             if(searchTerm.toLowerCase().includes(coffee.name.toLowerCase())){
+    //                 filteredCoffees.push(coffee)
+    //             }
+    //         }else{
+    //             filteredCoffees.push(coffee)
+    //         }
+    //     }
+    // })
+    const searchFilter = new RegExp(`^${searchTerm}`, 'g')
+    const filteredCoffees = coffees.filter(coffee => coffee.name.match(searchFilter) && (coffee.roast === selectedRoast || selectedRoast == 'all roasts'))
 
     if(filteredCoffees.length == 0){
-        tbody.innerHTML = "<div style='display: flex; align-items-center; justify-content: center;'><em>Search Not Found</em></div>"
+        coffeesContainer.innerHTML = "<div style='display: flex; align-items-center; justify-content: center;'><em>Search Not Found</em></div>"
     }else{
-        tbody.innerHTML = renderCoffees(filteredCoffees);
+        coffeesContainer.innerHTML = renderCoffees(filteredCoffees);
     }
 }
 // coffee list
@@ -83,7 +86,7 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 //updating selecting coffee code
-let tbody = document.querySelector('#coffees');
+let coffeesContainer = document.querySelector('#coffees');
 let submitButton = document.querySelector('#submit');
 let roastSelection = document.querySelector('#roast-selection');
 
